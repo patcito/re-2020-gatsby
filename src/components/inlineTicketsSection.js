@@ -83,18 +83,26 @@ export default function InlineTicketsSection({ event }) {
     console.log(tickets)
     tickets.map(ticket => {
       if (ticket.orderedQuantity > 0) {
+        let combo_ids = []
+        if (ticket.selectedCombos) {
+          ticket.selectedCombos.map(selectedCombo => {
+            combo_ids.push(selectedCombo.id)
+          })
+        }
         order.tickets.push({
           ticket_max_per_order: ticket.maxPerOrder,
           ticket_children_ids: ticket.childrenIds,
           ticket_id: ticket.id,
           discount_id: ticket.discount_id,
           quantity: ticket.orderedQuantity,
+          combo_ids: combo_ids,
         })
       }
     })
     console.log(order)
     if (window && window.fetch && order.tickets.length > 0) {
-      fetch('https://www.react-europe.org/checkout', {
+      //fetch('https://www.react-europe.org/checkout', {
+      fetch('http://localhost:4449/checkout', {
         method: 'post',
         body: JSON.stringify(order),
         headers: {
@@ -110,7 +118,8 @@ export default function InlineTicketsSection({ event }) {
           console.log(data)
           if (data.order && data.order.id && data.order.uuid) {
             document.location =
-              'https://checkout.eventlama.com/#/events/reacteurope-2020/orders/' +
+              /*'https://checkout.eventlama.com/#/events/reacteurope-2020/orders/' +*/
+              'http://localhost:3001/#/events/cluster-test/orders/' +
               data.order.id +
               '/edit/' +
               data.order.uuid
@@ -201,7 +210,7 @@ export default function InlineTicketsSection({ event }) {
                   </div>
                   <div>
                     <div class="row ticket_secound-row">
-                      <div>
+                      <div style={{ width: '100%' }}>
                         {message.message ? (
                           <div
                             class={`alert alert-${message.status}`}
@@ -211,7 +220,8 @@ export default function InlineTicketsSection({ event }) {
                           </div>
                         ) : null}
                         {tickets.map((ticket, index) =>
-                          ticket.soldOut ? (
+                          ticket.soldOut ||
+                          new Date(ticket.endDate) < new Date() ? (
                             <div class="regular_ticket" key={index}>
                               <div class="row no-gutters">
                                 <div class="col-md-6">
@@ -291,6 +301,68 @@ export default function InlineTicketsSection({ event }) {
                                             e.target.value
                                           )
                                           let newTickets = [...tickets]
+                                          if (ticket.isCombo) {
+                                            if (!ticket.selectedCombos)
+                                              ticket.selectedCombos = []
+                                            if (
+                                              ticket.selectedCombos.length >
+                                              ticket.orderedQuantity
+                                            ) {
+                                              console.log(
+                                                'ordereded qty: ',
+                                                ticket.orderedQuantity
+                                              )
+                                              console.log(
+                                                'selectec combos length: ',
+                                                ticket.selectedCombos.length
+                                              )
+                                              console.log(
+                                                'diff: ',
+                                                ticket.orderedQuantity -
+                                                  ticket.selectedCombos.length
+                                              )
+                                              let diff =
+                                                ticket.selectedCombos.length -
+                                                ticket.orderedQuantity
+
+                                              for (let i = 0; i < diff; i++) {
+                                                console.log('i: ', i)
+                                                ticket.selectedCombos.pop()
+                                              }
+                                            }
+                                            if (
+                                              ticket.selectedCombos.length <
+                                              ticket.orderedQuantity
+                                            ) {
+                                              console.log(
+                                                'ordereded qty: ',
+                                                ticket.orderedQuantity
+                                              )
+                                              console.log(
+                                                'selectec combos length: ',
+                                                ticket.selectedCombos.length
+                                              )
+                                              console.log(
+                                                'diff: ',
+                                                ticket.orderedQuantity -
+                                                  ticket.selectedCombos.length
+                                              )
+                                              let diff =
+                                                ticket.orderedQuantity -
+                                                ticket.selectedCombos.length
+                                              let firstEnabledCombo = {}
+                                              ticket.combos.map(c => {
+                                                if (!c.disabled)
+                                                  firstEnabledCombo = c
+                                              })
+                                              for (let i = 0; i < diff; i++) {
+                                                console.log('i: ', i)
+                                                ticket.selectedCombos.push(
+                                                  firstEnabledCombo
+                                                )
+                                              }
+                                            }
+                                          }
                                           newTickets[index] = ticket
                                           setTickets(newTickets)
                                           console.log(newTickets)
@@ -329,6 +401,59 @@ export default function InlineTicketsSection({ event }) {
                                         </li>
                                       </ul>
                                     </div>
+                                    {ticket.selectedCombos
+                                      ? ticket.selectedCombos.map(
+                                          (
+                                            selectedCombo,
+                                            indexSelectedCombos
+                                          ) => (
+                                            <div
+                                              key={indexSelectedCombos}
+                                              className="regular_ticket_input"
+                                            >
+                                              Pick a combo{' '}
+                                              <select
+                                                onChange={e => {
+                                                  console.log(e.target.value)
+                                                  let newTickets = [...tickets]
+                                                  let selectedCombo = {}
+                                                  ticket.combos.map((c, i) => {
+                                                    console.log(
+                                                      'selected',
+                                                      c,
+                                                      e.target.value
+                                                    )
+                                                    if (
+                                                      parseInt(c.id) ===
+                                                      parseInt(e.target.value)
+                                                    ) {
+                                                      selectedCombo = c
+                                                    }
+                                                  })
+                                                  ticket.selectedCombos[
+                                                    indexSelectedCombos
+                                                  ] = selectedCombo
+                                                  newTickets[index] = ticket
+                                                  setTickets(newTickets)
+
+                                                  setTickets(tickets)
+                                                }}
+                                              >
+                                                {ticket.combos.map(combo =>
+                                                  !combo.disabled ? (
+                                                    <option
+                                                      key={combo.id}
+                                                      value={combo.id}
+                                                    >
+                                                      {combo.name}
+                                                    </option>
+                                                  ) : null
+                                                )}
+                                              </select>
+                                            </div>
+                                          )
+                                        )
+                                      : null}{' '}
                                     {ticket.showDescription ? (
                                       <div
                                         className="regular_ticket_input"

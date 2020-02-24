@@ -64,9 +64,9 @@ export default function IndexPage({ data, location }) {
   return (
     <Layout location={location}>
       <Meta site={get(data, 'site.meta')} />
-      <TrackVisibility>
+      {/*<TrackVisibility>
         <Hero banner={data.banner.childImageSharp.fluid} />
-      </TrackVisibility>
+      </TrackVisibility>*/}
 
       <section className="conference" id="conference">
         <div className="container">
@@ -81,12 +81,12 @@ export default function IndexPage({ data, location }) {
         </div>
         <Caroussel />
       </section>
-      <SpeakersSection speakers={event.speakers} />
+      {/*<SpeakersSection speakers={event.speakers} />
       <ScheduleSection
         schedule={schedule}
         setSchedule={setSchedule}
         event={event}
-      />
+      />*}
       {/*
       <div style={{ display: 'none' }}>
         <TicketsSection />
@@ -586,7 +586,7 @@ export const pageQuery = graphql`
       }
     }
     eventlama {
-      events(slug: "reacteurope-2020") {
+      events(slug: "cluster-test") {
         id
         description
         websiteUrl
@@ -648,6 +648,12 @@ export const pageQuery = graphql`
           studentDiscountQuantity
           twitterDiscountPercentage
           twitterDiscountQuantity
+          isCombo
+          combos {
+            id
+            name
+            disabled
+          }
         }
         collaborators {
           id

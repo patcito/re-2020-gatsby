@@ -70,7 +70,8 @@ module.exports = {
         // This is the field under which it's accessible
         fieldName: 'eventlama',
         // URL to query from
-        url: 'https://api.eventlama.com/gql',
+        //url: 'https://api.eventlama.com/gql',
+        url: 'http://localhost:4449/gql',
         refetchInterval: 60,
       },
     },
