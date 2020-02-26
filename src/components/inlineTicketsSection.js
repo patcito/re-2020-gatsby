@@ -352,14 +352,13 @@ export default function InlineTicketsSection({ event }) {
                                                 ticket.selectedCombos.length
                                               let firstEnabledCombo = {}
                                               ticket.combos.map(c => {
-                                                if (!c.disabled)
+                                                if (!c.disabled) {
                                                   firstEnabledCombo = c
+                                                }
                                               })
                                               for (let i = 0; i < diff; i++) {
                                                 console.log('i: ', i)
-                                                ticket.selectedCombos.push(
-                                                  firstEnabledCombo
-                                                )
+                                                ticket.selectedCombos.push({})
                                               }
                                             }
                                           }
@@ -401,59 +400,84 @@ export default function InlineTicketsSection({ event }) {
                                         </li>
                                       </ul>
                                     </div>
-                                    {ticket.selectedCombos
-                                      ? ticket.selectedCombos.map(
-                                          (
-                                            selectedCombo,
-                                            indexSelectedCombos
-                                          ) => (
-                                            <div
-                                              key={indexSelectedCombos}
-                                              className="regular_ticket_input"
-                                            >
-                                              Pick a combo{' '}
-                                              <select
-                                                onChange={e => {
-                                                  console.log(e.target.value)
-                                                  let newTickets = [...tickets]
-                                                  let selectedCombo = {}
-                                                  ticket.combos.map((c, i) => {
-                                                    console.log(
-                                                      'selected',
-                                                      c,
-                                                      e.target.value
-                                                    )
-                                                    if (
-                                                      parseInt(c.id) ===
-                                                      parseInt(e.target.value)
-                                                    ) {
-                                                      selectedCombo = c
-                                                    }
-                                                  })
-                                                  ticket.selectedCombos[
-                                                    indexSelectedCombos
-                                                  ] = selectedCombo
-                                                  newTickets[index] = ticket
-                                                  setTickets(newTickets)
-
-                                                  setTickets(tickets)
-                                                }}
+                                    <ol>
+                                      {ticket.selectedCombos ? (
+                                        <label>
+                                          Please select a combo for each of your{' '}
+                                          {ticket.orderedQuantity} {ticket.name}
+                                        </label>
+                                      ) : null}
+                                      {ticket.selectedCombos
+                                        ? ticket.selectedCombos.map(
+                                            (
+                                              selectedCombo,
+                                              indexSelectedCombos
+                                            ) => (
+                                              <div
+                                                key={indexSelectedCombos}
+                                                className="regular_ticket_input"
                                               >
-                                                {ticket.combos.map(combo =>
-                                                  !combo.disabled ? (
-                                                    <option
-                                                      key={combo.id}
-                                                      value={combo.id}
-                                                    >
-                                                      {combo.name}
+                                                <li
+                                                  style={{
+                                                    marginBottom: '5px',
+                                                  }}
+                                                >
+                                                  <select
+                                                    onChange={e => {
+                                                      console.log(
+                                                        e.target.value
+                                                      )
+                                                      let newTickets = [
+                                                        ...tickets,
+                                                      ]
+                                                      let selectedCombo = {}
+                                                      ticket.combos.map(
+                                                        (c, i) => {
+                                                          console.log(
+                                                            'selected',
+                                                            c,
+                                                            e.target.value
+                                                          )
+                                                          if (
+                                                            parseInt(c.id) ===
+                                                            parseInt(
+                                                              e.target.value
+                                                            )
+                                                          ) {
+                                                            selectedCombo = c
+                                                          }
+                                                        }
+                                                      )
+                                                      ticket.selectedCombos[
+                                                        indexSelectedCombos
+                                                      ] = selectedCombo
+                                                      newTickets[index] = ticket
+                                                      setTickets(newTickets)
+
+                                                      setTickets(tickets)
+                                                    }}
+                                                  >
+                                                    <option>
+                                                      Pick a combo
                                                     </option>
-                                                  ) : null
-                                                )}
-                                              </select>
-                                            </div>
+                                                    {ticket.combos.map(combo =>
+                                                      !combo.disabled ? (
+                                                        <option
+                                                          key={combo.id}
+                                                          value={combo.id}
+                                                        >
+                                                          {combo.name}
+                                                        </option>
+                                                      ) : null
+                                                    )}
+                                                  </select>
+                                                </li>
+                                              </div>
+                                            )
                                           )
-                                        )
-                                      : null}{' '}
+                                        : null}{' '}
+                                    </ol>
+
                                     {ticket.showDescription ? (
                                       <div
                                         className="regular_ticket_input"
