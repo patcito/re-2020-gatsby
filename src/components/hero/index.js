@@ -149,7 +149,7 @@ export default function Hero({ banner }) {
                 <iframe
                   width="100%"
                   className="ytiframe"
-                  src="https://www.youtube.com/embed/videoseries?list=PLCC436JpVnK0Q4WHoB85ZYBwcCyTaMgAl&index=0"
+                  src="https://www.youtube.com/embed/CUPzvJibdTQ"
                   frameborder="0"
                   allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen
@@ -172,6 +172,17 @@ export default function Hero({ banner }) {
                   December 9th, 2021 <span>(online workshops)</span>
                 </h3>
                 <h4>Virtual (will be back to in-person in 2022)</h4>
+                <h4>
+                  👀 Looking for an in-person conference to learn how to take
+                  advantage of your React skills in Web3?{' '}
+                  <a
+                    href="https://www.ethdubaiconf.org"
+                    style={{ color: '#FFF', textDecoration: 'underline' }}
+                  >
+                    We are organizing ETHDubai conference and would love to see
+                    you there!
+                  </a>
+                </h4>
               </div>
             </div>
             <div className="react_btns">

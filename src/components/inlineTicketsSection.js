@@ -152,23 +152,32 @@ export default function InlineTicketsSection({ event }) {
             <div className="headings">
               <Img fixed={imgs.ticket.childImageSharp.fixed} />
               <h2>Get Your Tickets</h2>
-              <h3>
-                An announcement will be made soon about the tickets and when
-                they will be available. Make sure to subscribe to our mailing
-                list below.
-              </h3>
               {true ? (
-                <h4>
-                  Watch the 2021 edition online for free, you just need{' '}
-                  <a
-                    href="https://youtu.be/CUPzvJibdTQ"
-                    target="_blank"
-                    style={{ textDecoration: 'underline' }}
-                  >
-                    to register here to the stream open to all and click the
-                    bell icon to get notified when we go live 🌎 🎥
-                  </a>
-                </h4>
+                <>
+                  {' '}
+                  <h4>
+                    Watch the 2021 edition online for free, you just need{' '}
+                    <a
+                      href="https://youtu.be/CUPzvJibdTQ"
+                      target="_blank"
+                      style={{ textDecoration: 'underline' }}
+                    >
+                      to register here to the stream open to all and click the
+                      bell icon to get notified when we go live 🌎 🎥
+                    </a>
+                  </h4>
+                  <h4>
+                    👀 Looking for an in-person conference to learn how to take
+                    advantage of your React skills in Web3?{' '}
+                    <a
+                      href="https://www.ethdubaiconf.org"
+                      style={{ textDecoration: 'underline' }}
+                    >
+                      We are organizing ETHDubai conference and would love to
+                      see you there!
+                    </a>
+                  </h4>
+                </>
               ) : null}
               {/*<iframe
                 width="560"
@@ -430,17 +439,6 @@ export default function InlineTicketsSection({ event }) {
                   </div>
                 </div>
               </section>
-
-              <iframe
-                src="https://docs.google.com/forms/d/e/1FAIpQLSdzO30xezfb4VUdbZGvLx7faXkoc9H7fcLXw1U9pIUnOKJkOQ/viewform?embedded=true"
-                width="640"
-                height="545"
-                frameborder="0"
-                marginheight="0"
-                marginwidth="0"
-              >
-                Loading…
-              </iframe>
             </div>
           </div>
         </div>
