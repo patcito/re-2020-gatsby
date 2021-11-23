@@ -44,7 +44,7 @@ export default function ScheduleSection({ schedule, setSchedule, event }) {
           <h2>Schedule</h2>
           <p>Stay tuned for our new schedule soon.</p>
         </div>
-        <div className="schedule_content" style={{ display: 'none' }}>
+        <div className="schedule_content">
           <div className="row">
             <div className="col-md-4">
               <ul className="nav nav-tabs" id="myTab" role="tablist">
@@ -59,14 +59,14 @@ export default function ScheduleSection({ schedule, setSchedule, event }) {
                       data-scroll-ignore="true"
                       role="tab"
                       aria-controls="schedule-wrapper"
-                      onClick={e => {
+                      onClick={(e) => {
                         setCurrentScheduleTab(i)
                         if (document) {
-                          let dayd = document.getElementById('day-' + (i + 1))
-                            .offsetTop
-                          let scrolldiv = document.getElementById(
-                            'schedule-scroll'
-                          )
+                          let dayd = document.getElementById(
+                            'day-' + (i + 1)
+                          ).offsetTop
+                          let scrolldiv =
+                            document.getElementById('schedule-scroll')
                           scrolldiv.scrollTop = dayd - 120
                         }
                         e.preventDefault()
@@ -105,7 +105,7 @@ export default function ScheduleSection({ schedule, setSchedule, event }) {
                           name="search"
                           placeholder="Search schedule"
                           value={scheduleQuery}
-                          onChange={e => {
+                          onChange={(e) => {
                             setScheduleQuery(e.target.value)
                           }}
                         />
@@ -220,7 +220,7 @@ export default function ScheduleSection({ schedule, setSchedule, event }) {
                                         to={`#slot-${slot_slug}`}
                                         replace
                                         data-scroll-ignore
-                                        onClick={e => {
+                                        onClick={(e) => {
                                           e.preventDefault()
                                           //   navigate(`#slot-${slot_slug}`)
                                         }}
