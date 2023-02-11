@@ -171,18 +171,7 @@ export default function Hero({ banner }) {
                 <h3>
                   December 9th, 2021 <span>(online workshops)</span>
                 </h3>
-                <h4>Virtual (will be back to in-person in 2022)</h4>
-                <h4>
-                  👀 Looking for an in-person conference to learn how to take
-                  advantage of your React skills in Web3?{' '}
-                  <a
-                    href="https://www.ethdubaiconf.org"
-                    style={{ color: '#FFF', textDecoration: 'underline' }}
-                  >
-                    We are organizing ETHDubai conference and would love to see
-                    you there!
-                  </a>
-                </h4>
+                <h4>Virtual (will be back to in-person in 2023)</h4>
               </div>
             </div>
             <div className="react_btns">

@@ -166,17 +166,6 @@ export default function InlineTicketsSection({ event }) {
                       bell icon to get notified when we go live 🌎 🎥
                     </a>
                   </h4>
-                  <h4>
-                    👀 Looking for an in-person conference to learn how to take
-                    advantage of your React skills in Web3?{' '}
-                    <a
-                      href="https://www.ethdubaiconf.org"
-                      style={{ textDecoration: 'underline' }}
-                    >
-                      We are organizing ETHDubai conference and would love to
-                      see you there!
-                    </a>
-                  </h4>
                 </>
               ) : null}
               {/*<iframe

@@ -79,12 +79,7 @@ export default function ScheduleSection({ schedule, setSchedule, event }) {
                         })}{' '}
                         {new Date(day.date).getDate()}
                       </span>{' '}
-                      - DAY {i + 1}{' '}
-                      {i < 3 || i === 6
-                        ? 'WORKSHOPS'
-                        : i == 5
-                        ? 'WORKSHOPS'
-                        : 'CONFERENCE'}
+                      - DAY {i + 1} {i < 1 ? 'WORKSHOPS' : 'CONFERENCE'}
                     </Link>
                   </li>
                 ))}
@@ -204,7 +199,7 @@ export default function ScheduleSection({ schedule, setSchedule, event }) {
                                             hour12: false,
                                           })
                                           .split(':')[1]}{' '}
-                                      (Paris time, UTC+2)
+                                      (Paris time, UTC+1)
                                     </h5>
                                     <h4
                                       style={{
