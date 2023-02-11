@@ -179,13 +179,13 @@ export default function InlineTicketsSection({ event }) {
                 allowfullscreen
               ></iframe>*/}
               <h3 className="d-none">
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSejydjRdhyxE5sbzRqT93aHhx0PosforW88yZdem7HejNl-yA/viewform">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfgD0hcOCA-nAyjqVCkXO92keAkjgRqcTMy-IH6SYRxsDNr1Q/viewform?embedded=true">
                   Don't miss our tickets release by subscribing here.
                 </a>
               </h3>
               <section
                 style={{ display: 'inone' }}
-                className="book_ticket"
+                className="book_ticket d-none"
                 id="book_ticket"
               >
                 <div className="container"></div>
